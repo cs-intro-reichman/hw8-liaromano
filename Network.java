@@ -72,7 +72,7 @@ public class Network {
         {
             return false;
         }
-        if(name1.toLowerCase().equals(name2.toLowerCase()) || )
+        if(name1.toLowerCase().equals(name2.toLowerCase()))
         {
             return false;
         }
