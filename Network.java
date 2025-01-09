@@ -68,11 +68,15 @@ public class Network {
     public boolean addFollowee(String name1, String name2) {
         //// Replace the following statement with your code
         User u= getUser(name1);
-        if(getUser(name1)==null || getUser(name2)==null) 
+        if(getUser(name1)==null || getUser(name2)==null || name1== null || name2==null) 
         {
             return false;
         }
         if(name1.toLowerCase().equals(name2.toLowerCase()))
+        {
+            return false;
+        }
+        if(u.getfCount() == User.maxfCount)
         {
             return false;
         }
@@ -120,16 +124,18 @@ public class Network {
         int max=0;
         for(int i=0;i<userCount;i++)
         {
-            if(users[i]!=null && followeeCount(users[i].getName())>max)
+            if(users[i]!=null)
             {
+                if(followeeCount(users[i].getName())>max)
+                {
                 max=followeeCount(users[i].getName());
                 mostPopular= users[i];
+                }
             }
         }
-        String mostP= mostPopular.getName();
-        if(mostP!=null)
+        if(mostPopular!=null)
         {
-            return mostP;
+            return mostPopular.getName();
         }
         return null;
     }
