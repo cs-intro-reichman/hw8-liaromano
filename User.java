@@ -100,13 +100,16 @@
     public int countMutual(User other) {
          //// Replace the following statement with your code
         int count=0;
-        String [] followsO= other.getfFollows();
-        for(int i=0;i<followsO.length;i++)
+        for(int i=0;i<this.fCount;i++)
         {
-            if(follows(followsO[i]))
+            for(int j=0;j<other.getfCount();j++)
             {
-                count++;
+                if(this.follows[i].equals(other.follows[j]))
+                {
+                    count++;
+                }
             }
+
         }
          return count;
     }

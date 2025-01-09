@@ -67,16 +67,16 @@ public class Network {
      *  or if the "follows" addition failed for some reason, returns false. */
     public boolean addFollowee(String name1, String name2) {
         //// Replace the following statement with your code
-        User add= getUser(name1);
-        if(getUser(name1)==null || getUser(name2)==null || !add.addFollowee(name2)|| name1.toLowerCase().equals(name2.toLowerCase())|| name1==null|| name2==null)
+        User u= getUser(name1);
+        if(getUser(name1)==null || getUser(name2)==null) 
         {
             return false;
         }
-        else
+        if(name1.toLowerCase().equals(name2.toLowerCase()) || )
         {
-        add.addFollowee(name2);
-        return true;
+            return false;
         }
+        return u.addFollowee(name2);
     }
     
     /** For the user with the given name, recommends another user to follow. The recommended user is
@@ -90,7 +90,7 @@ public class Network {
         {
             return null;
         }
-        for(int i=0; i<userCount;i++)
+        for(int i=0; i<getUserCount();i++)
         {
             if(users[i]==u)
             {
@@ -120,7 +120,7 @@ public class Network {
         int max=0;
         for(int i=0;i<userCount;i++)
         {
-            if(followeeCount(users[i].getName())>max)
+            if(users[i]!=null && followeeCount(users[i].getName())>max)
             {
                 max=followeeCount(users[i].getName());
                 mostPopular= users[i];
@@ -155,13 +155,7 @@ public class Network {
        String finalS= "Network:";
        for(int i=0;i<userCount;i++)
        {
-            String [] arr= users[i].getfFollows();
-            String followers="";
-            for(int j=0;j<users[i].getfCount();j++)
-            {   
-                followers=followers+ arr[j];
-            }
-            finalS= finalS+ users[i].getName()+" -> "+ followers;
+        finalS= finalS+ "\n"+ users[i];
        }
        return finalS;
     }
