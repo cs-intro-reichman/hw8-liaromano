@@ -49,7 +49,7 @@ public class Network {
     *  Otherwise, creates a new user with the given name, adds the user to this network, and returns true. */
     public boolean addUser(String name) {
         //// Replace the following statement with your code
-        if(users.length==users.length || getUser(name)!=null)
+        if(users.length==userCount || getUser(name)!=null)
         {
             return false;
         }
@@ -68,7 +68,7 @@ public class Network {
     public boolean addFollowee(String name1, String name2) {
         //// Replace the following statement with your code
         User add= getUser(name1);
-        if(getUser(name1)==null || getUser(name2)==null || !add.addFollowee(name2)|| name1.toLowerCase().equals(name2.toLowerCase())|| name1.equals(null)|| name2.equals(null))
+        if(getUser(name1)==null || getUser(name2)==null || !add.addFollowee(name2)|| name1.toLowerCase().equals(name2.toLowerCase())|| name1==null|| name2==null)
         {
             return false;
         }
@@ -105,10 +105,9 @@ public class Network {
                 }
             }
         }
-        String nameU= mostRecommendedUserToFollow.getName();
-        if(nameU!=null)
+        if(mostRecommendedUserToFollow!=null)
         {
-            return nameU;
+            return mostRecommendedUserToFollow.getName();
         }
         return null;
     }
@@ -153,7 +152,7 @@ public class Network {
     // Returns a textual description of all the users in this network, and who they follow.
     public String toString() {
        //// Replace the following statement with your code
-       String finalS= "Network:\n";
+       String finalS= "Network:";
        for(int i=0;i<userCount;i++)
        {
             String [] arr= users[i].getfFollows();
@@ -162,7 +161,7 @@ public class Network {
             {   
                 followers=followers+ arr[j];
             }
-            finalS= finalS+ users[i].getName()+" -> "+ followers + "\n";
+            finalS= finalS+ users[i].getName()+" -> "+ followers;
        }
        return finalS;
     }
