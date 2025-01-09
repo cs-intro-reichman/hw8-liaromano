@@ -32,9 +32,12 @@ public class Network {
         //// Replace the following statement with your code
         for(int i=0; i<userCount;i++)
         {
-            if(users[i].getName().equals(name))
+            if(users[i]!=null)
             {
-                return users[i];
+                if(users[i].getName().toLowerCase().equals(name.toLowerCase()))
+                {
+                    return users[i];
+                }
             }
         }
         return null;
@@ -54,6 +57,7 @@ public class Network {
         {
             User u= new User(name);
             users[userCount]= u;
+            userCount++;
         }
         return true;
     }
@@ -64,7 +68,7 @@ public class Network {
     public boolean addFollowee(String name1, String name2) {
         //// Replace the following statement with your code
         User add= getUser(name1);
-        if(getUser(name1)==null || getUser(name2)==null || !add.addFollowee(name2))
+        if(getUser(name1)==null || getUser(name2)==null || !add.addFollowee(name2)|| name1.toLowerCase().equals(name2.toLowerCase())|| name1.equals(null)|| name2.equals(null))
         {
             return false;
         }
@@ -82,9 +86,13 @@ public class Network {
         User mostRecommendedUserToFollow = null;
         int max=0;
         User u= getUser(name);
+        if(u==null)
+        {
+            return null;
+        }
         for(int i=0; i<userCount;i++)
         {
-            if(users[i].getName().equals(name))
+            if(users[i]==u)
             {
                 continue;
             }
@@ -98,7 +106,11 @@ public class Network {
             }
         }
         String nameU= mostRecommendedUserToFollow.getName();
-        return nameU;
+        if(nameU!=null)
+        {
+            return nameU;
+        }
+        return null;
     }
 
     /** Computes and returns the name of the most popular user in this network: 
@@ -116,7 +128,11 @@ public class Network {
             }
         }
         String mostP= mostPopular.getName();
-        return mostP;
+        if(mostP!=null)
+        {
+            return mostP;
+        }
+        return null;
     }
 
     /** Returns the number of times that the given name appears in the follows lists of all
@@ -144,7 +160,7 @@ public class Network {
             String followers="";
             for(int j=0;j<users[i].getfCount();j++)
             {   
-                followers=followers+ ", " + arr[j];
+                followers=followers+ arr[j];
             }
             finalS= finalS+ users[i].getName()+" -> "+ followers + "\n";
        }
